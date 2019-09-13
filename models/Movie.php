@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use yii\base\Model;
-use yii\web\UploadedFile;
 use Yii;
 
 /**
@@ -21,7 +19,6 @@ class Movie extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
 
-    public $image;
 
     public static function tableName()
     {
@@ -34,23 +31,14 @@ class Movie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'descrip', 'released_date', 'image'], 'required'],
+            [['name', 'descrip', 'released_date'], 'required'],
             [['descrip'], 'string'],
             [['released_date'], 'safe'],
-            [['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
             [['name'], 'string', 'max' => 255],
         ];
     }
 
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->image->saveAs('uploads/' . $this->image->baseName . '.' . $this->image->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * {@inheritdoc}
@@ -60,7 +48,7 @@ class Movie extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'descrip' => 'Descrip',
+            'descrip' => 'Description',
             'released_date' => 'Released Date',
             'image' => 'Image',
         ];
