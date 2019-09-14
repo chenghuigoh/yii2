@@ -11,7 +11,7 @@ use Yii;
  * @property string $name
  * @property string $descrip
  * @property string $released_date
- * @property int $image
+ * @property string $image
  */
 class Movie extends \yii\db\ActiveRecord
 {
@@ -31,11 +31,10 @@ class Movie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'descrip', 'released_date'], 'required'],
+            [['name', 'descrip', 'released_date','image'], 'required'],
             [['descrip'], 'string'],
             [['released_date'], 'safe'],
-            [['image'], 'file', 'extensions' => 'png, jpg'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'image'], 'string', 'max' => 255],
         ];
     }
 

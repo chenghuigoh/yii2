@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'released_date')->Input('date') ?>
 
-    <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
       <!-- <?php echo Html::img('@web/images/sp.jpg') ?> -->
 

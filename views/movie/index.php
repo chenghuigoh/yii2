@@ -1,7 +1,9 @@
 <?php
 
+use yii\base\Model;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Movie;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MovieSearch */
