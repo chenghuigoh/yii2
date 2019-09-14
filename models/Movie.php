@@ -15,6 +15,8 @@ use Yii;
  */
 class Movie extends \yii\db\ActiveRecord
 {
+    public $image1;
+
     /**
      * {@inheritdoc}
      */
@@ -31,10 +33,12 @@ class Movie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'descrip', 'released_date','image'], 'required'],
-            [['descrip'], 'string'],
+            [['name', 'descrip', 'released_date', 'image'], 'required'],
+            [['descrip', 'image'], 'string'],
             [['released_date'], 'safe'],
-            [['name', 'image'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
+            [['image1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
+
         ];
     }
 
@@ -51,5 +55,20 @@ class Movie extends \yii\db\ActiveRecord
             'released_date' => 'Released Date',
             'image' => 'Image',
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->image1) {
+            $this->image1->saveAs('../uploads/' . $this->image1->baseName . '.' .
+                $this->image1->extension);
+            $this->image = $this->image1->baseName . '.' . $this->image1->extension;
+            $this->image1 = null;
+            echo "<script>console.log('true' );</script>";
+            return $this;
+        } else {
+            echo "<script>console.log('false' );</script>";
+            return $this;
+        }
     }
 }

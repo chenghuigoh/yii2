@@ -10,6 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Movies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
 ?>
 <div class="movie-view">
 
@@ -33,8 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'descrip:ntext',
             'released_date',
-            'image',
+            [
+                'attribute' => 'image',
+                'value' => Yii::$app->homeUrl . '../uploads/' . $model->image,
+                'format' => ['image', ['max-height' => '100']],
+            ]
+
         ],
+
     ]) ?>
 
 </div>
