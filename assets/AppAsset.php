@@ -24,7 +24,9 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/movielist.css'
     ];
-    public $js = [];
+    public $js = [
+        'yii\bootstrap4\BootstrapPluginAsset'
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

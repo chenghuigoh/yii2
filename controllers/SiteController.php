@@ -137,5 +137,17 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    
+   /**
+     * Displays movie detail.
+     *
+     * 
+     */
+    public function actionMoviedetail()
+    {
+        $id = Yii::$app->request->get('id');
+        $model = Movie::findOne($id);
+        return $this->render('moviedetail', [
+            'model' => $model,
+        ]);
+    } 
 }
