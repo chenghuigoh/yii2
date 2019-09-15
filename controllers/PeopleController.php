@@ -65,14 +65,27 @@ class PeopleController extends Controller
     public function actionCreate()
     {
         $model = new People();
+        $model->generateAuthKey();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password = People::hashPassword($model->password); // Hash the password before you save it.
+            if ($model->save())
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->password = $this->setPassword($this->password);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
