@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'descrip:ntext',
-            'released_date',
+            [
+                'attribute' => 'released_date',
+                'value' => date("d-M-Y",  strtotime($model->released_date)),
+            ],
             [
                 'attribute' => 'image',
                 'value' => Yii::$app->homeUrl . '../uploads/movie/' . $model->image,
