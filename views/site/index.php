@@ -2,7 +2,11 @@
 
 /* @var $this yii\web\View */
 
+use yii\widgets\GridView;
+
+
 $this->title = 'My Movie';
+
 ?>
 <div class="site-index">
 
@@ -12,6 +16,17 @@ $this->title = 'My Movie';
     </div>
 
     <div class="body-content">
+
+
+        <?php
+
+        use yii\widgets\ListView;
+
+        echo ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemView' => 'movielist',
+        ]);
+        ?>
 
         <div class="row">
             <div class="col-lg-4">
@@ -45,6 +60,7 @@ $this->title = 'My Movie';
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
         </div>
+
 
     </div>
 </div>

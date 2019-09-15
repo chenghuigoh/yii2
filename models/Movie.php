@@ -60,7 +60,7 @@ class Movie extends \yii\db\ActiveRecord
     public function upload()
     {
         if ($this->image1) {
-            $this->image1->saveAs('../uploads/' . $this->image1->baseName . '.' .
+            $this->image1->saveAs('../uploads/movie/' . $this->image1->baseName . '.' .
                 $this->image1->extension);
             $this->image = $this->image1->baseName . '.' . $this->image1->extension;
             $this->image1 = null;
