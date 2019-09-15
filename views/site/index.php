@@ -22,12 +22,21 @@ $this->title = 'My Movie';
 
         use yii\widgets\ListView;
 
-        echo ListView::widget([
-            'dataProvider' => $dataProvider,
-            'itemView' => 'movielist',
-        ]);
+        // echo ListView::widget([
+        //     'dataProvider' => $dataProvider,
+        //     'itemView' => 'movielist',
+        // ]);
         ?>
+        <div class="row">
+            <?php
 
+            echo ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView' => 'movielist',
+
+            ]);
+            ?>
+        </div>
         <div class="row">
             <div class="col-lg-4">
                 <h2>Heading</h2>

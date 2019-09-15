@@ -70,7 +70,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Movie::find(),
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -139,5 +139,23 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+
+    /**
+     * Displays movie detail.
+     *
+     * @return string
+     */
+    public function actionMoviedetail()
+    {
+        $id = Yii::$app->request->get('id');
+
+        $model = Movie::findOne($id);
+
+
+        return $this->render('moviedetail', [
+            'model' => $model,
+        ]);
     }
 }
