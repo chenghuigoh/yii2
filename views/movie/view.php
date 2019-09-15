@@ -33,7 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'descrip:ntext',
             'released_date',
-            'image',
+            [
+                'attribute' => 'image',
+                'value' => Yii::$app->homeUrl . '../uploads/movie/' . $model->image,
+                'format' => ['image', ['max-height' => '100']],
+            ]
         ],
     ]) ?>
 

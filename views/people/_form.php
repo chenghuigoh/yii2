@@ -22,9 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput() ?>
-  
-    <!-- <?= $form->field($model, 'image')->fileInput() ?> -->
+    <?= $form->field($model, 'image1')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

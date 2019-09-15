@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use yii\base\Model;
-use yii\web\UploadedFile;
 use Yii;
 
 /**
@@ -22,6 +20,7 @@ class People extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $image1;
 
     public static function tableName()
     {
@@ -34,11 +33,12 @@ class People extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'password', 'phone', 'email', 'address','image'], 'required'],
+            [['name', 'password', 'phone', 'email', 'address', 'image'], 'required'],
             [['phone'], 'integer'],
             ['email', 'email'],
             [['name', 'password', 'email', 'address', 'image'], 'string', 'max' => 255],
-       
+            [['image1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
+
         ];
     }
 
@@ -58,5 +58,18 @@ class People extends \yii\db\ActiveRecord
         ];
     }
 
-
+    public function upload()
+    {
+        if ($this->image1) {
+            $this->image1->saveAs('../uploads/people/' . $this->image1->baseName . '.' .
+                $this->image1->extension);
+            $this->image = $this->image1->baseName . '.' . $this->image1->extension;
+            $this->image1 = null;
+            echo "<script>console.log('true' );</script>";
+            return $this;
+        } else {
+            echo "<script>console.log('false' );</script>";
+            return $this;
+        }
+    }
 }

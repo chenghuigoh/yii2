@@ -68,8 +68,12 @@ class MovieController extends Controller
     {
         $model = new Movie();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->image1 = UploadedFile::getInstance($model, 'image1');
+
+            if ($model->upload()->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -88,8 +92,11 @@ class MovieController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->image1 = UploadedFile::getInstance($model, 'image1');
+            if ($model->upload()->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
@@ -126,6 +133,4 @@ class MovieController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }
