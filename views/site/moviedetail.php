@@ -56,7 +56,6 @@ use yii\helpers\Url;
             </div>
 
             <div class="tab-pane fade active in" id="timeline">
-
             </div>
         </div>
     </div>

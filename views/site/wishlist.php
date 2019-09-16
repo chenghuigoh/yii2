@@ -42,24 +42,25 @@ use yii\grid\GridView;
                 );
             },
         ],
-        // [
-        //     'attribute' => 'id',
-        //     'class' => 'yii\grid\ActionColumn',
-        //     'template' => '{deletewishlist} ',
-        //     'buttons' => [
-        //         'deletewishlist' => function ($url, $model) use ($id) {
-        //             return Html::a(
-        //                 '<span class=" glyphicon glyphicon-remove"></span>',
-        //                 $url .= '&uid=' . $id,
-        //                 [
-        //                     'title' => 'Remove',
-        //                     'data-pjax' => 'id',
-        //                 ]
-        //             );
-        //         },
-        //     ],
-        // ],
-
-
     ],
+    // 'rowOptions' => function ($model, $key, $index, $grid) {
+    //     return ['id' => $model['id'], 'onclick' => 'v(this.id);'];
+    // },
+    'rowOptions'   => function ($model, $key, $index, $grid) {
+        return ['data-id' => $model['movie_id']];
+    },
+
 ]); ?>
+
+
+<?php
+$this->registerJs("
+
+    $('td').click(function (e) {
+        var id = $(this).closest('tr').data('id');
+        if(e.target == this)
+            location.href = '" . Url::to(['site/moviedetail']) . "?id=' + id;
+    });
+
+");
+?>

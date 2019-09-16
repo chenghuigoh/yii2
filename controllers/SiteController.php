@@ -75,7 +75,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Movie::find(),
             'pagination' => [
-                'pageSize' => 1,
+                'pageSize' => 10,
             ],
         ]);
         return $this->render('index', [
@@ -181,7 +181,7 @@ class SiteController extends Controller
         //assign to model
         $userId = Yii::$app->user->identity->id;
         $id = (int) $userId;
-        $sql = 'SELECT wishlist.id, wishlist.user_id, wishlist.movie_id, user.username, movie.name, user.id AS movie_name, movie.image FROM `wishlist` INNER JOIN user ON wishlist.user_id = user.id INNER JOIN movie ON wishlist.movie_id = movie.id WHERE user_id=:user_id';
+        $sql = 'SELECT wishlist.id, wishlist.user_id, wishlist.movie_id, user.username, movie.name AS movie_name, movie.image FROM `wishlist` INNER JOIN user ON wishlist.user_id = user.id INNER JOIN movie ON wishlist.movie_id = movie.id WHERE user_id=:user_id';
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
