@@ -41,10 +41,26 @@ class MovieController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['view', 'create', 'delete', 'update'],
+                        'actions' => ['view'],
                         'allow' => true,
-                        'roles' => ['viewMovie' && '@'],
+                        'roles' => ['viewMovie'],
                     ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['createMovie'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['deleteMovie'],
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['updateMovie'],
+                    ],
+
                 ],
             ],
             'verbs' => [

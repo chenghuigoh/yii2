@@ -14,6 +14,7 @@ use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 use app\models\Wishlist;
 use app\models\People;
+use yii\data\SqlDataProvider;
 
 class SiteController extends Controller
 {
@@ -74,7 +75,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Movie::find(),
             'pagination' => [
-                'pageSize' => 3,
+                'pageSize' => 1,
             ],
         ]);
         return $this->render('index', [
@@ -158,18 +159,66 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionAddwishlist($id)
+    {
+        $id = Yii::$app->request->get('id');
+        $userId = Yii::$app->user->identity->id;
+        $model = new Wishlist();
+        $model->setWishlist($id, $userId);
+        if ($model->save(false)) {
+            return $this->redirect(['index']);
+        }
+    }
 
     /**
-     * Add to wishlist
+     * Displays wishlist page.
      *
-     * 
+     * @return string
      */
     public function actionWishlist()
     {
-        $id = Yii::$app->request->get('id');
-        $model = People::findOne($id);
-        return $this->render('wishlist', [
-            'model' => $model,
+        // get wishlist 
+        //assign to model
+        $userId = Yii::$app->user->identity->id;
+        $id = (int) $userId;
+        $sql = 'SELECT wishlist.id, wishlist.user_id, wishlist.movie_id, user.username, movie.name, user.id AS movie_name, movie.image FROM `wishlist` INNER JOIN user ON wishlist.user_id = user.id INNER JOIN movie ON wishlist.movie_id = movie.id WHERE user_id=:user_id';
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sql,
+            'pagination' => [
+                'pageSize' => 3,
+            ],
+            'params' => [
+                ':user_id' => $id,
+            ],
         ]);
+
+        return $this->render(
+            'wishlist',
+            [
+                'dataProvider' => $dataProvider,
+            ]
+        );
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionDeletewishlist()
+    {
+
+        $id = Yii::$app->request->get('id');
+
+        $wishlist = Wishlist::findOne($id);
+        if (!$wishlist) {
+            return $this->actionWishlist();
+        }
+        if ($wishlist->delete()) {
+            return $this->actionWishlist();
+        } else {
+            echo "<script>alert('Could not remove')>;</script>";
+        };
     }
 }

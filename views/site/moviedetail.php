@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap4\Tabs;
+
 
 ?>
 <div class="row">
@@ -46,7 +46,13 @@ use yii\bootstrap4\Tabs;
                     </b>
                     <?= $model->descrip ?>
                 </h5>
-                <?= Html::submitButton('Wishlist', ['class' => 'btn btn-success', 'name' => 'wishlist-button']) ?>
+                <?php
+                if (Yii::$app->user->can('addWishlist')) {
+                    ?>
+                    <button class="btn btn-default" style="width:100%" onclick="addWishList(<?= $model->id ?>)">Add To Wishlist</button>
+                <?php
+                } ?>
+
             </div>
 
             <div class="tab-pane fade active in" id="timeline">
@@ -55,3 +61,16 @@ use yii\bootstrap4\Tabs;
         </div>
     </div>
 </div>
+
+<script>
+    function addWishList(id) {
+        $.ajax({
+            url: '<?php echo Yii::$app->homeUrl . 'site/addwishlist'  ?>',
+            type: 'get',
+            data: {
+                'id': id
+            },
+            success: function(data) {}
+        });
+    }
+</script>

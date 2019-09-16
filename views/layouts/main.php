@@ -44,8 +44,13 @@ AppAsset::register($this);
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Movie', 'url' => ['/movie/index']],
                 ['label' => 'User', 'url' => ['/people/index']],
-                ['label' => 'Wishlist', 'url' => ['/site/wishlist']],
-
+                [
+                    'label' => 'Wishlist',
+                    'url' => ['/site/wishlist'],
+                    'visible' => !Yii::$app->user->isGuest,
+                ],
+                // Yii::$app->user->isGuest ? null
+                //     : (['label' => 'Wishlist', 'url' => ['/site/wishlist']]),
 
                 Yii::$app->user->isGuest
                     ? (['label' => 'Login', 'url' => ['/site/login']])
@@ -57,6 +62,8 @@ AppAsset::register($this);
                         )
                         . Html::endForm()
                         . '</li>')
+
+
 
             ]
         ]);

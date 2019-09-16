@@ -38,10 +38,27 @@ class PeopleController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['view', 'create', 'delete', 'update'],
+                        'actions' => ['view'],
                         'allow' => true,
-                        'roles' => ['viewMovie' && '@'],
+                        'roles' => ['viewUser'],
                     ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['createUser'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['deleteUser'],
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['updateUser'],
+                    ],
+
+
                 ],
             ],
 

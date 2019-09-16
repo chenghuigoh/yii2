@@ -33,7 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'email:email',
             'address',
-            'image',
+            [
+                'attribute' => 'image',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return Html::img(
+                        Yii::$app->homeUrl . '../uploads/movie/' . $data['image'],
+                        ['width' => '70px']
+                    );
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
