@@ -38,22 +38,27 @@ AppAsset::register($this);
             ],
         ]);
         echo Nav::widget([
+
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Movie', 'url' => ['/movie/index']],
-                ['label' => 'People', 'url' => ['/people/index']],
+                ['label' => 'User', 'url' => ['/people/index']],
+                ['label' => 'Wishlist', 'url' => ['/site/wishlist']],
 
-                Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->name . ')',
-                        ['class' => 'btn btn-link logout']
-                    )
 
-                    . Html::endForm()
-                    . '</li>')
-            ],
+                Yii::$app->user->isGuest
+                    ? (['label' => 'Login', 'url' => ['/site/login']])
+                    : ('<li>'
+                        . Html::beginForm(['/site/logout'], 'post')
+                        . Html::submitButton(
+                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            ['class' => 'btn btn-link logout']
+                        )
+                        . Html::endForm()
+                        . '</li>')
+
+            ]
         ]);
         NavBar::end();
         ?>

@@ -45,10 +45,13 @@ use yii\bootstrap4\Tabs;
                         Description:
                     </b>
                     <?= $model->descrip ?>
-
                 </h5>
+                <?= Html::submitButton('Wishlist', ['class' => 'btn btn-success', 'name' => 'wishlist-button']) ?>
             </div>
-            <?= Html::submitButton('Wishlist', ['class' => 'btn btn-secondary', 'name' => 'wishlist-button']) ?>
+
+            <div class="tab-pane fade active in" id="timeline">
+
+            </div>
         </div>
     </div>
 </div>

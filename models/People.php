@@ -12,7 +12,7 @@ use Yii;
  * This is the model class for table "people".
  *
  * @property int $id
- * @property string $name
+ * @property string $username
  * @property string $password
  * @property int $phone
  * @property string $email
@@ -29,7 +29,7 @@ class People extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'people';
+        return 'user';
     }
 
     /**
@@ -38,10 +38,10 @@ class People extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'password'], 'required'],
+            [['username', 'password'], 'required'],
             [['phone'], 'integer'],
             ['email', 'email'],
-            [['name', 'password', 'email', 'address', 'image'], 'string', 'max' => 255],
+            [['username', 'password', 'email', 'address', 'image'], 'string', 'max' => 255],
             [['image1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
         ];
     }
@@ -53,7 +53,7 @@ class People extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'username' => 'Userame',
             'password' => 'Password',
             'phone' => 'Phone',
             'email' => 'Email',

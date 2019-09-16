@@ -12,6 +12,8 @@ use app\models\ContactForm;
 use app\models\Movie;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use app\models\Wishlist;
+use app\models\People;
 
 class SiteController extends Controller
 {
@@ -25,6 +27,11 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
                 'rules' => [
+                    [
+                        'actions' => [''],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -137,7 +144,7 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-   /**
+    /**
      * Displays movie detail.
      *
      * 
@@ -149,5 +156,20 @@ class SiteController extends Controller
         return $this->render('moviedetail', [
             'model' => $model,
         ]);
-    } 
+    }
+
+
+    /**
+     * Add to wishlist
+     *
+     * 
+     */
+    public function actionWishlist()
+    {
+        $id = Yii::$app->request->get('id');
+        $model = People::findOne($id);
+        return $this->render('wishlist', [
+            'model' => $model,
+        ]);
+    }
 }
