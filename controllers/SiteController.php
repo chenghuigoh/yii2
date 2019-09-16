@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Movie;
+use app\models\Wishlist;
 
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
@@ -56,6 +57,8 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'greeting' => 'app\components\GreetingAction',
+
         ];
     }
 
@@ -157,5 +160,35 @@ class SiteController extends Controller
         return $this->render('moviedetail', [
             'model' => $model,
         ]);
+    }
+
+
+
+    /**
+     * Displays movie detail.
+     *
+     * @return string
+     */
+    public function actionAddwishlist($id)
+    {
+
+
+        $id = Yii::$app->request->get('id');
+        $userId = Yii::$app->user->identity->id;
+        $model = new Wishlist();
+
+        $model->setWishlist($id, $userId);
+
+        if ($model->save(false)) {
+            return $this->redirect(['index']);
+        }
+    }
+
+    public function actionOpenGoogle()
+    {
+        echo "<script>console.log('true' );</script>";
+
+        // redirect the user browser to http://google.com
+        return $this->redirect('http://google.com');
     }
 }
