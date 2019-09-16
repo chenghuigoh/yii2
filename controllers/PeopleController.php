@@ -66,11 +66,11 @@ class PeopleController extends Controller
     public function actionCreate()
     {
         $model = new People();
-
+        $model->generateAuthKey();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->image1 = UploadedFile::getInstance($model, 'image1');
-
+            $model->password = People::hashPassword($model->password); // Hash the password before you save it.
             if ($model->upload()->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -79,6 +79,16 @@ class PeopleController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->password = $this->setPassword($this->password);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -91,15 +101,19 @@ class PeopleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->generateAuthKey();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->image1 = UploadedFile::getInstance($model, 'image1');
+            $model->password = People::hashPassword($model->password); // Hash the password before you save it.
             if ($model->upload()->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
 
         return $this->render('update', [
+
+
             'model' => $model,
         ]);
     }

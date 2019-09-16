@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
+use yii\base\Security;
+
 use Yii;
 
 /**
@@ -14,6 +18,7 @@ use Yii;
  * @property string $email
  * @property string $address
  * @property string $image
+ * @property string $auth_key
  */
 class People extends \yii\db\ActiveRecord
 {
@@ -33,12 +38,11 @@ class People extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'password', 'phone', 'email', 'address', 'image'], 'required'],
+            [['name', 'password'], 'required'],
             [['phone'], 'integer'],
             ['email', 'email'],
             [['name', 'password', 'email', 'address', 'image'], 'string', 'max' => 255],
             [['image1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
-
         ];
     }
 
@@ -71,5 +75,30 @@ class People extends \yii\db\ActiveRecord
             echo "<script>console.log('false' );</script>";
             return $this;
         }
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Security::generateRandomKey();
+    }
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = Security::generatePasswordHash($password);
+        echo "<script>console.log('true' );</script>";
+        return $this->save();
+    }
+    public static function hashPassword($password)
+    { // Function to create password hash
+        $salt = "movie";
+        return sha1($password . $salt);
+        // return Security::generatePasswordHash($password);
     }
 }
