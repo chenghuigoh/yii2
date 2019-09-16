@@ -12,7 +12,7 @@ use yii\web\IdentityInterface;
  * This is the model class for table "tbl_user".
  *
  * @property string $id
- * @property string $name
+ * @property string $username
  * @property string $password
  */
 class User extends \yii\db\ActiveRecord  implements IdentityInterface
@@ -31,8 +31,8 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'password'], 'required'],
-            [['name', 'password'], 'string', 'max' => 100]
+            [['username', 'password'], 'required'],
+            [['username', 'password'], 'string', 'max' => 100]
         ];
     }
 
@@ -43,7 +43,7 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return [
             'id' => 'Userid',
-            'name' => 'Name',
+            'username' => 'Username',
             'password' => 'Password'
         ];
     }
@@ -74,12 +74,12 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     /**
      * Finds user by username
      *
-     * @param  string      $name
+     * @param  string      $username
      * @return static|null
      */
-    public static function findByUsername($name)
+    public static function findByUsername($username)
     {
-        return static::findOne(['name' => $name]);
+        return static::findOne(['username' => $username]);
     }
 
     /**

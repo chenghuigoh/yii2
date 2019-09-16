@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use yii2mod\rbac\filters\AccessControl;
 
 /**
  * MovieController implements the CRUD actions for Movie model.
@@ -27,6 +28,23 @@ class MovieController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['viewMovie'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['createMovie'],
+                    ],
+                ]
+
             ],
         ];
     }

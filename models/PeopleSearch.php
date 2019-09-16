@@ -18,7 +18,7 @@ class PeopleSearch extends People
     {
         return [
             [['id', 'phone'], 'integer'],
-            [['name', 'password', 'email', 'address', 'image'], 'safe'],
+            [['username', 'password', 'email', 'address', 'image'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class PeopleSearch extends People
             'phone' => $this->phone,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'address', $this->address])
