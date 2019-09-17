@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'released_date') ?>
 
+    <?= $form->field($model, 'timeline') ?>
+
     <?= $form->field($model, 'image') ?>
 
     <div class="form-group">

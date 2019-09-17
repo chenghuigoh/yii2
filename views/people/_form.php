@@ -8,26 +8,68 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="people-form">
+<div class="container">
+    <div class="row">
 
-    <?php $form = ActiveForm::begin(); ?>
+        <?php
+        if ($model->image) {
+            ?>
+            <div class="col-lg-6">
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+                <?php
+                    if ($model->image) {
+                        ?>
+                    <img class="user-img" src="<?php echo Yii::$app->homeUrl . '../uploads/people/' . $model->image; ?> " />
+                <?php
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+                    }
+                    ?>
+            </div>
+        <?php
 
-    <?= $form->field($model, 'phone')->textInput() ?>
+        }
+        ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        <?php
+        if ($model->image) {
+            ?>
+            <div class="col-lg-6">
+            <?php
+            }
+            ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+            <?php
+            if (!$model->image) {
+                ?>
+                <div class="col-lg-12">
+                <?php
+                }
+                ?>
 
-    <?= $form->field($model, 'image1')->fileInput()->label('Upload Image') ?>
+                <div class="people-form">
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                    <?php $form = ActiveForm::begin(); ?>
+
+                    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'phone')->textInput() ?>
+
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'image1')->fileInput()->label('Upload Image') ?>
+
+                    <div class="form-group">
+                        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
+
+                </div>
+
+                </div>
+            </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>

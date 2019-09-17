@@ -12,6 +12,7 @@ use Yii;
  * @property string $descrip
  * @property string $released_date
  * @property string $image
+ * @property string $timeline
  */
 class Movie extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class Movie extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'descrip', 'released_date', 'image'], 'required'],
-            [['descrip'], 'string'],
+            [['descrip', 'timeline'], 'string'],
             [['released_date'], 'safe'],
             [['name', 'image'], 'string', 'max' => 255],
             [['image1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
@@ -51,6 +52,7 @@ class Movie extends \yii\db\ActiveRecord
             'descrip' => 'Description',
             'released_date' => 'Released Date',
             'image' => 'Image',
+            'timeline' => 'Timeline'
         ];
     }
 

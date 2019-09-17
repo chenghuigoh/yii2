@@ -37,6 +37,8 @@ AppAsset::register($this);
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
         ]);
+
+        /*
         echo Nav::widget([
 
             'options' => ['class' => 'navbar-nav navbar-right'],
@@ -62,10 +64,36 @@ AppAsset::register($this);
                         )
                         . Html::endForm()
                         . '</li>')
-
-
-
             ]
+        ]);
+        */
+
+        $navItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Movie', 'url' => ['/movie/index']],
+            ['label' => 'User', 'url' => ['/user/admin/index']],
+
+        ];
+        if (Yii::$app->user->isGuest) {
+            array_push($navItems, ['label' => 'Sign In', 'url' => ['/user/login']], ['label' => 'Sign Up', 'url' => ['/user/register']]);
+        } else {
+            array_push(
+                $navItems,
+                [
+                    'label' => 'Wishlist (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/wishlist'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+                [
+                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ]
+            );
+        }
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $navItems,
         ]);
         NavBar::end();
         ?>

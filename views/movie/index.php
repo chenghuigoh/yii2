@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'descrip:ntext',
             'released_date',
+            'timeline',
             [
                 'attribute' => 'image',
                 'format' => 'html',

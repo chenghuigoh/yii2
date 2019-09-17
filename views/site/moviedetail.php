@@ -49,13 +49,18 @@ use yii\helpers\Url;
                 <?php
                 if (Yii::$app->user->can('addWishlist')) {
                     ?>
-                    <button class="btn btn-default" style="width:100%" onclick="addWishList(<?= $model->id ?>)">Add To Wishlist</button>
+                    <button class="btn btn-info" style="width:100%" onclick="addWishList(<?= $model->id ?>)">Add To Wishlist</button>
                 <?php
                 } ?>
 
             </div>
 
-            <div class="tab-pane fade active in" id="timeline">
+            <div class="tab-pane fade" id="timeline">
+                <h5> <b>
+                        Showtime:
+                    </b>
+                    <?= $model->timeline ?>
+                </h5>
             </div>
         </div>
     </div>

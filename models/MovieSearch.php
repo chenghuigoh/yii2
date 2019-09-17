@@ -18,7 +18,7 @@ class MovieSearch extends Movie
     {
         return [
             [['id'], 'integer'],
-            [['name', 'descrip', 'released_date', 'image'], 'safe'],
+            [['name', 'descrip', 'released_date', 'image', 'timeline'], 'safe'],
         ];
     }
 
