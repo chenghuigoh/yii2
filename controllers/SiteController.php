@@ -75,7 +75,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Movie::find(),
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 12,
             ],
         ]);
         return $this->render('index', [
