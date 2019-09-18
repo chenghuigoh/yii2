@@ -10,8 +10,6 @@ use yii\grid\GridView;
     <h2>Your wishlist</h2>
 </div>
 
-
-
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [

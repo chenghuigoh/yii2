@@ -66,6 +66,31 @@ use yii\helpers\Url;
     </div>
 </div>
 
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <h4><i class="icon fa fa-check"></i>Saved!</h4>
+        <?= Yii::$app->session->getFlash('success') ?>
+    </div>
+<?php endif; ?>
+
+
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <h4><i class="icon fa fa-check"></i>Saved!</h4>
+        <?= Yii::$app->session->getFlash('error') ?>
+    </div>
+<?php endif; ?>
+<!-- <?php
+
+        use yii\bootstrap\Alert;
+
+        echo Alert::widget([
+            'options' => ['class' => 'alert-info'],
+            'body' => Yii::$app->session->getFlash('wishlist'),
+        ]);
+        ?> -->
 <script>
     function addWishList(id) {
         $.ajax({
@@ -75,6 +100,7 @@ use yii\helpers\Url;
                 'id': id
             },
             success: function(data) {}
+
         });
     }
 </script>

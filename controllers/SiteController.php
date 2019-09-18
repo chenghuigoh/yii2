@@ -161,7 +161,6 @@ class SiteController extends Controller
             return $this->redirect(['site/index']);
         }
 
-
         return $this->render('moviedetail', [
             'model' => $model,
         ]);
@@ -173,7 +172,11 @@ class SiteController extends Controller
         $userId = Yii::$app->user->identity->id;
         $model = new Wishlist();
         $model->setWishlist($id, $userId);
-        if ($model->save(false)) {
+        if ($model->save(true)) {
+            Yii::$app->session->setFlash('success', "Wishlist is added successfully!");
+            return $this->redirect(['wishlist']);
+        } else {
+            Yii::$app->session->setFlash('error', "Wishlist is not added!");
             return $this->redirect(['index']);
         }
     }
