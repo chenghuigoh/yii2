@@ -14,6 +14,7 @@ use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 use app\models\Wishlist;
 use app\models\People;
+use app\widgets\Alert;
 use yii\data\SqlDataProvider;
 
 
@@ -153,8 +154,14 @@ class SiteController extends Controller
      */
     public function actionMoviedetail()
     {
-        $id = Yii::$app->request->get('id');
+        $id = Yii::$app->request->get('id', 0);
         $model = Movie::findOne($id);
+
+        if (!$model) {
+            return $this->redirect(['site/index']);
+        }
+
+
         return $this->render('moviedetail', [
             'model' => $model,
         ]);

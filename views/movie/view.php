@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'timeline',
             [
                 'attribute' => 'image',
-                'value' => Yii::$app->homeUrl . '../uploads/movie/' . $model->image,
+                'value' => '@web/uploads/movie/' . $model->image,
                 'format' => ['image', ['max-height' => '100']],
             ]
         ],
